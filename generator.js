@@ -15,3 +15,12 @@ function collectTransition(samples) {
     return transitions;
   }, {});
 }
+
+function predictNext(chain, transitions) {
+  const lastState = chain.at(-1);
+  const nextWords = transitions[lastState] ?? [];
+  return pickRandom(nextWords);
+}
+
+const random = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
+const pickRandom = (list) => list[random(0, list.length - 1)];
